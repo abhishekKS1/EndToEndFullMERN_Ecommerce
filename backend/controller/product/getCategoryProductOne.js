@@ -18,7 +18,7 @@ const getCategoryProduct = async (req, res) => {
       }
 
       res.json({
-         message: "1-1 product document from each distinct categories",
+         message: "array of 1-1 product document from each distinct categories",
          data: productByCategory,
          success: true,
          error: false,
