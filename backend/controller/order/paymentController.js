@@ -48,7 +48,7 @@ const paymentController = async (request, response) => {
 
       response.status(301).json(session);
    } catch (error) {
-      response.status(400).json({
+      response.status(500).json({
          message: error.message || error,
          error: true,
          success: false,
