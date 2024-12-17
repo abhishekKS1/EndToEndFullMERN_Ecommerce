@@ -11,7 +11,7 @@ const uploadImage  = async(image) => {
         body : formData
     })
 
-    return dataResponse.json()
+    return await dataResponse.json()
 
 }
 
