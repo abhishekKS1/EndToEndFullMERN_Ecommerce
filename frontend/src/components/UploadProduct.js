@@ -146,7 +146,7 @@ const UploadProduct = ({
               <label htmlFor='uploadImageInput'>
               <div className='p-2 bg-slate-100 border rounded h-32 w-full flex justify-center items-center cursor-pointer'>
                         <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
-                          <span className='text-4xl'><FaCloudUploadAlt/></span>
+                          <FaCloudUploadAlt className='text-4xl text-blue-500' />
                           <p className='text-sm'>Upload Product Image</p>
                           <input type='file' id='uploadImageInput'  className='hidden' onChange={handleUploadProduct}/>
                         </div>
