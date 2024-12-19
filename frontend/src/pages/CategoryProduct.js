@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import productCategory from '../helpers/productCategory'
 import VerticalCard from '../components/VerticalCard'
 import SummaryApi from '../common'
@@ -60,6 +60,11 @@ const CategoryProduct = () => {
         return null
       }).filter(el => el)
 
+//         const arrayOfCategory = Object.keys(selectCategory).filter(
+//   (categoryKeyName) => selectCategory[categoryKeyName]
+// ); //better
+
+
       setFilterCategoryList(arrayOfCategory)
 
       //format for url change when change on the checkbox
@@ -69,6 +74,8 @@ const CategoryProduct = () => {
         }
         return `category=${el}&&`
       })
+
+        // const urlFormat = arrayOfCategory.map((el) => `category=${el}`).join("&&"); //better
 
       navigate("/product-category?"+urlFormat.join(""))
     },[selectCategory])
@@ -88,9 +95,9 @@ const CategoryProduct = () => {
       }
     }
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-    },[sortBy])
+    // },[sortBy])
     
   return (
     <div className='container mx-auto p-4'>
