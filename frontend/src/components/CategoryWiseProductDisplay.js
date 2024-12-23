@@ -76,7 +76,7 @@ const CategroyWiseProductDisplay = ({ category, heading }) => {
                                 <p className="text-slate-500 line-through">{displayINRCurrency(product?.price)}</p>
                              </div>
                              <button
-                                className="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-0.5 rounded-full"
+                                className="text-sm bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600  text-white px-3 py-0.5 rounded-full"
                                 onClick={(e) => handleAddToCart(e, product?._id)}>
                                 Add to Cart
                              </button>

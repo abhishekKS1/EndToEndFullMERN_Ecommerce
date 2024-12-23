@@ -56,7 +56,9 @@ const HorizontalCardProduct = ({ category, heading }) => {
             {loading
                ? loadingList.map((product, index) => {
                     return (
-                       <div className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex">
+                       <div
+                          key={index}
+                          className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex">
                           <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px] animate-pulse"></div>
                           <div className="p-4 grid w-full gap-2">
                              <h2 className="font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black bg-slate-200 animate-pulse p-1 rounded-full"></h2>
@@ -73,6 +75,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
                : data.map((product, index) => {
                     return (
                        <Link
+                          key={index}
                           to={"product/" + product?._id}
                           className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex">
                           <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
@@ -88,7 +91,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
                                 <p className="text-slate-500 line-through">{displayINRCurrency(product?.price)}</p>
                              </div>
                              <button
-                                className="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-0.5 rounded-full"
+                                className="text-sm bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600  text-white px-3 py-0.5 rounded-full"
                                 onClick={(e) => handleAddToCart(e, product?._id)}>
                                 Add to Cart
                              </button>

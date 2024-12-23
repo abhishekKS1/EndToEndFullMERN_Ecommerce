@@ -62,7 +62,9 @@ const ChangeUserRole = ({ name, email, role, userId, onClose, callFunc }) => {
                </select>
             </div>
 
-            <button className="w-fit mx-auto block  py-1 px-3 rounded-full bg-red-600 text-white hover:bg-red-700" onClick={updateUserRole}>
+            <button
+               className="w-fit mx-auto block  py-1 px-3 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white "
+               onClick={updateUserRole}>
                Change Role
             </button>
          </div>

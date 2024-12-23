@@ -18,7 +18,7 @@ const AdminPanel = () => {
       <div className="min-h-[calc(100vh-120px)] md:flex hidden">
          <aside className="bg-white min-h-full  w-full  max-w-60 customShadow">
             <div className="h-32  flex justify-center items-center flex-col">
-               <div className="text-5xl cursor-pointer relative flex justify-center">
+               <div className="mt-6 text-5xl cursor-pointer relative flex justify-center">
                   {user?.profilePic ? (
                      <img src={user?.profilePic} className="w-20 h-20 rounded-full" alt={user?.name} />
                   ) : (
