@@ -34,7 +34,7 @@ const SummaryApi = {
       method: "get",
    },
    updateProduct: {
-      url: `${backendDomin}/api/update-product`,
+      url: `${backendDomin}/api/update-product`, //distructive
       method: "post",
    },
    categoryProduct: {

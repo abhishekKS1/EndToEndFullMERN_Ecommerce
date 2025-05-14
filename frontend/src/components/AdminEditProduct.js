@@ -65,26 +65,28 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
    const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const response = await fetch(SummaryApi.updateProduct.url, {
-         method: SummaryApi.updateProduct.method,
-         credentials: "include",
-         headers: {
-            "content-type": "application/json",
-         },
-         body: JSON.stringify(data),
-      });
+      //distructive action be careful
+      // const response = await fetch(SummaryApi.updateProduct.url, {
+      //    method: SummaryApi.updateProduct.method,
+      //    credentials: "include",
+      //    headers: {
+      //       "content-type": "application/json",
+      //    },
+      //    body: JSON.stringify(data),
+      // });
 
-      const responseData = await response.json();
+      // const responseData = await response.json();
 
-      if (responseData.success) {
-         toast.success(responseData?.message);
-         onClose();
-         fetchdata();
-      }
+      // if (responseData.success) {
+      //    toast.success(responseData?.message);
+      //    onClose();
+      //    fetchdata();
+      // }
 
-      if (responseData.error) {
-         toast.error(responseData?.message);
-      }
+      // if (responseData.error) {
+      //    toast.error(responseData?.message);
+      // }
+      alert("Distructive action not allowed");
    };
 
    return (
