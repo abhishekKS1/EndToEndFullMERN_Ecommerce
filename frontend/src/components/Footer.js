@@ -8,7 +8,7 @@ const Footer = () => {
       © 2025 Abhishek Kumar Sharma. 
          All rights reserved.
             </p>
-         <p>Thank you for choosing us!!</p>
+         <p className="text-center font-bold">Thank you for choosing us!!</p>
          </div>
       </footer>
    );
