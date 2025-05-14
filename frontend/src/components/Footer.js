@@ -5,8 +5,9 @@ const Footer = () => {
       <footer className="bg-slate-200">
          <div className="container mx-auto p-4">
             <pre className="text-center font-bold" title="shop fast">        
-      Thank you for choosing us!!{" "}
-   © 2025 Abhishek Kumar Sharma. All rights reserved.
+      Thank you for choosing us!!
+      © 2025 Abhishek Kumar Sharma. 
+         All rights reserved.
             </pre>
          </div>
       </footer>
