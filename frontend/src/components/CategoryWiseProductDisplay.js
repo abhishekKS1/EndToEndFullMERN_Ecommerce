@@ -1,22 +1,48 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 import displayINRCurrency from "../helpers/displayCurrency";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import addToCart from "../helpers/addToCart";
 import Context from "../context";
 import scrollTop from "../helpers/scrollTop";
+import SummaryApi from "../common"; //fixing addtocartbutton ui
 
 const CategroyWiseProductDisplay = ({ category, heading }) => {
    const [data, setData] = useState([]);
    const [loading, setLoading] = useState(true);
+
+   const [addedToCartSuccess, setAddedToCartSuccess] = useState([]);
+   const currentCart = async () => {
+      const response = await fetch(SummaryApi.addToCartProductView.url, {
+         method: SummaryApi.addToCartProductView.method,
+         credentials: "include",
+         headers: {
+            "content-type": "application/json",
+         },
+      });
+      const responseData = await response.json();
+      const cartIdsArray = responseData?.data?.map((item) => item.productId._id);
+      console.log("cartIdsArray", cartIdsArray);
+      setAddedToCartSuccess((prev) => [...prev, ...(cartIdsArray || [])]);
+   }; // fixing addtocartbutton ui
+
    const loadingList = new Array(13).fill(null);
 
    const { fetchUserAddToCart } = useContext(Context);
 
    const handleAddToCart = async (e, id) => {
-      await addToCart(e, id);
-      fetchUserAddToCart();
+      try {
+         const addRes = await addToCart(e, id);
+         console.log("add to cart response", addRes.data);
+         console.log("addedToCartSuccess", addedToCartSuccess);
+         if (addRes?.data.productId) {
+            setAddedToCartSuccess((prev) => [...prev, addRes?.data?.productId]);
+         } // fixing addtocartbutton ui
+
+         fetchUserAddToCart();
+      } catch (err) {
+         console.log("error in add to cart", err);
+      }
    };
 
    const fetchData = async () => {
@@ -30,6 +56,7 @@ const CategroyWiseProductDisplay = ({ category, heading }) => {
 
    useEffect(() => {
       fetchData();
+      currentCart(); // fixing addtocartbutton ui
    }, []);
 
    return (
@@ -78,7 +105,9 @@ const CategroyWiseProductDisplay = ({ category, heading }) => {
                              <button
                                 className="text-sm bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600  text-white px-3 py-0.5 rounded-full"
                                 onClick={(e) => handleAddToCart(e, product?._id)}>
-                                Add to Cart
+                                {/* Add to Cart */}
+                                {addedToCartSuccess.includes(product?._id) ? "Added" : "Add to Cart"}
+                                {/* fixing addtocartbutton ui */}
                              </button>
                           </div>
                        </Link>

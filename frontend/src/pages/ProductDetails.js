@@ -24,6 +24,21 @@ const ProductDetails = () => {
    const productImageListLoading = new Array(4).fill(null);
    const [activeImage, setActiveImage] = useState("");
 
+   const [addedToCartSuccess, setAddedToCartSuccess] = useState([]);
+   const currentCart = async () => {
+      const response = await fetch(SummaryApi.addToCartProductView.url, {
+         method: SummaryApi.addToCartProductView.method,
+         credentials: "include",
+         headers: {
+            "content-type": "application/json",
+         },
+      });
+      const responseData = await response.json();
+      const cartIdsArray = responseData?.data?.map((item) => item.productId._id);
+      console.log("cartIdsArray", cartIdsArray);
+      setAddedToCartSuccess((prev) => [...prev, ...(cartIdsArray || [])]);
+   }; // fixing addtocartbutton ui
+
    const [zoomImageCoordinate, setZoomImageCoordinate] = useState({
       x: 0,
       y: 0,
@@ -56,6 +71,8 @@ const ProductDetails = () => {
 
    useEffect(() => {
       fetchProductDetails();
+
+      currentCart(); // fixing addtocartbutton ui
    }, [params]);
 
    const handleMouseEnterProduct = (imageURL) => {
@@ -84,7 +101,17 @@ const ProductDetails = () => {
    };
 
    const handleAddToCart = async (e, id) => {
-      await addToCart(e, id);
+      try {
+         const addRes = await addToCart(e, id);
+         console.log("add to cart response", addRes.data);
+         console.log("addedToCartSuccess", addedToCartSuccess);
+         if (addRes?.data.productId) {
+            setAddedToCartSuccess((prev) => [...prev, addRes?.data?.productId]);
+         }
+      } catch (error) {
+         console.log("error in add to cart", error);
+      } // fixing addtocartbutton ui
+
       fetchUserAddToCart();
    };
 
@@ -199,7 +226,8 @@ const ProductDetails = () => {
                      <button
                         className="border-2 border-red-600 rounded px-3 py-1 min-w-[120px] text-white font-medium    bg-red-600  hover:text-red-600 hover:bg-transparent"
                         onClick={(e) => handleAddToCart(e, data?._id)}>
-                        Add To Cart
+                        {addedToCartSuccess.includes(data._id) ? "Added" : "Add to Cart"}
+                        {/* fixing addtocartbutton ui */}
                      </button>
                   </div>
 
